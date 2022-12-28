@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.rdb-flex {
+    display: flex;
+}
+
+.rdb-flex-1 {
+    flex: 1;
+}
+
+.rdb-flex-column {
+    flex-direction: column;
+}
+
+.rdb-flex-space-between {
+    justify-content: space-between;
+}
+.rdb-flex-space-around {
+    justify-content: space-around;
+}
+.rdb-flex-space-evenly {
+    justify-content: space-evenly;
+}
+.rdb-flex-center {
+    justify-content: center;
+}
+.rdb-flex-end {
+    justify-content: flex-end;
+}
+
+.rdb-flex-top {
+    align-items: flex-start;
+}
+
+.rdb-flex-middle {
+    align-items: center;
+}
+
+.rdb-flex-bottom {
+    align-items: flex-end;
+}
+
+.rdb-margin-left-8 {
+    margin-left: 8px;
+}

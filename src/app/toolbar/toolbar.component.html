@@ -1,0 +1,16 @@
+<mat-toolbar class="rdb-flex rdb-flex-space-between">
+    <div class="rdb-flex">
+        <button mat-button [routerLink]="'items'" [routerLinkActive]="'active-link'">
+            <mat-icon>memory</mat-icon>
+            <span>Items</span>
+        </button>
+        <button class="rdb-margin-left-8" mat-button [routerLink]="'containers'" [routerLinkActive]="'active-link'">
+            <mat-icon>inventory_2</mat-icon>
+            <span>Containers</span>
+        </button>
+    </div>
+    <button mat-flat-button>
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+    </button>
+</mat-toolbar>
