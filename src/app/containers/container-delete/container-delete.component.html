@@ -1,0 +1,8 @@
+<h3>Delete container</h3>
+<p class="rdb-margin-top-32">
+    Are you sure that you want to delete container '{{ containerData?.name }} with all items in it'?
+</p>
+<div class="rdb-margin-top-32 rdb-width-100 rdb-flex rdb-flex-end">
+    <button mat-raised-button (click)="onCancel()">Cancel</button>
+    <button class="rdb-margin-left-16" color="accent" type="submit" mat-raised-button (click)="onDelete()">Delete</button>
+</div>

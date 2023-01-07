@@ -1,0 +1,8 @@
+<mat-sidenav-container class="rdb-height-100">
+    <mat-sidenav-content class="rdb-content-padding">
+        <ng-content></ng-content>
+    </mat-sidenav-content>
+    <mat-sidenav (closedStart)="onSideNavClose()" #sidenav mode="over" position="end" [opened]="sidebarOutlet.isActivated">
+        <router-outlet #sidebarOutlet="outlet"></router-outlet>
+    </mat-sidenav>
+</mat-sidenav-container>

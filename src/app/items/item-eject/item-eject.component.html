@@ -1,0 +1,27 @@
+<h3>Eject item(s)</h3>
+<ng-container *ngIf="item$ | async as item">
+    <p class="rdb-margin-top-32">
+        <strong>Item: </strong>
+        <span>{{ item.name }}</span>
+    </p>
+    <p>
+        <strong>Count: </strong>
+        <span>{{ item.count }}</span>
+    </p>
+    <p *ngIf="container$ | async as container">
+        <strong>Container: </strong>
+        <span>{{ container.name }}</span>
+    </p>
+    <form class="rdb-margin-top-32" [formGroup]="form">
+        <p>
+            <mat-form-field class="rdb-width-100" appearance="outline">
+                <mat-label>Count to eject</mat-label>
+                <input #countInput matInput [formControlName]="'ejectCount'" type="number" min="1" [max]="item.count" (focus)="onFocus()">
+                <mat-error *ngIf="form.controls.ejectCount.invalid">{{ getErrorMessageByError(form.controls.ejectCount) }}</mat-error>
+            </mat-form-field>
+        </p>
+        <div class="rdb-width-100 rdb-flex rdb-flex-end">
+            <button color="primary" type="submit" mat-raised-button [disabled]="form?.invalid" (click)="onEject()">Eject</button>
+        </div>
+    </form>
+</ng-container>

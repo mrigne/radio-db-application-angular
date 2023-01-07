@@ -1,3 +1,13 @@
 button.active-link {
     background-color: rgba(0, 0, 0, 0.2);
 }
+
+mat-toolbar.top-toolbar {
+    height: 64px;
+}
+
+.toolbar-logo {
+    height: 48px;
+    width: 48px;
+    filter: invert(100%);
+}

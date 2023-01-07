@@ -1,1 +1,37 @@
-<h1>Items will be here</h1>
+<rdb-content-with-sidenav [routeForClose]="appRoutes.items.full()">
+    <rdb-search #search class="search" (searchValue)="searchValue$.next($event)"></rdb-search>
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+            <td *matCellDef="let item">{{ item.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="count">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Count</th>
+            <td *matCellDef="let item">{{ item.count }}</td>
+        </ng-container>
+        <ng-container matColumnDef="menu">
+            <th class="rdb-text-align-right" mat-header-cell *matHeaderCellDef>
+                <button color="primary" mat-raised-button [routerLink]="appRoutes.items.add.full()">
+                    <span>Add Item</span>
+                    <mat-icon matIconPrefix>add</mat-icon>
+                </button>
+            </th>
+            <td *matCellDef="let item">
+                <button [routerLink]="appRoutes.items.itemId.eject.full(item.id)" class="rdb-inline" mat-icon-button matTooltip="Take Item(s)">
+                    <mat-icon>eject</mat-icon>
+                </button>
+                <button [routerLink]="appRoutes.items.itemId.add.full(item.id)" class="rdb-inline" mat-icon-button matTooltip="Add item(s)">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button (click)="onDelete(item)" class="rdb-inline" mat-icon-button matTooltip="Delete all items from container">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['name', 'count', 'menu']; sticky: true"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: ['name', 'count', 'menu']"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell no-data-cell" colspan="2">No items</td>
+        </tr>
+    </table>
+</rdb-content-with-sidenav>
