@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Config } from '../../config/config';
 import { IContainer } from '../../reducers/containers';
 import { HttpMethod } from '../requests/requester';
 import { RequesterFactory } from '../requests/requester-factory';
 
 @Injectable({ providedIn: 'root' })
 export class ContainersService {
-    private containersRequester = this.requesterFactory.createRequester<void, IContainer[]>({ url: 'https://localhost:7121/containers', method: HttpMethod.GET });
-    private createContainerRequester = this.requesterFactory.createRequester<IContainer, void>({ url: 'https://localhost:7121/container', method: HttpMethod.POST });
-    private updateContainerRequester = this.requesterFactory.createRequester<IContainer, void>({ url: 'https://localhost:7121/container', method: HttpMethod.PATCH });
-    private deleteContainerRequester = this.requesterFactory.createRequester<{ containerId: string }, void>({ url: 'https://localhost:7121/container/{containerId}', method: HttpMethod.DELETE });
+    private containersRequester = this.requesterFactory.createRequester<void, IContainer[]>({ url: `${Config.apiUrl}/containers`, method: HttpMethod.GET });
+    private createContainerRequester = this.requesterFactory.createRequester<IContainer, void>({ url: `${Config.apiUrl}/container`, method: HttpMethod.POST });
+    private updateContainerRequester = this.requesterFactory.createRequester<IContainer, void>({ url: `${Config.apiUrl}/container`, method: HttpMethod.PATCH });
+    private deleteContainerRequester = this.requesterFactory.createRequester<{ containerId: string }, void>({ url: `${Config.apiUrl}/container/{containerId}`, method: HttpMethod.DELETE });
 
     constructor(private requesterFactory: RequesterFactory) {
     }

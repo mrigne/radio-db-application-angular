@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, tap } from 'rxjs';
-import { JwtHelper } from '../../../helpers/jwt.helper';
+import { Config } from '../../config/config';
 import { HttpMethod } from '../requests/requester';
 import { RequesterFactory } from '../requests/requester-factory';
 
@@ -19,7 +19,7 @@ export interface ISignInResponse {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     public signinRequester = this.requesterFactory.createRequester<ISignInRequest, ISignInResponse>({
-        url: 'https://localhost:7121/login',
+        url: `${Config.apiUrl}/login`,
         method: HttpMethod.POST
     });
     constructor(private requesterFactory: RequesterFactory, private cookieService: CookieService) {

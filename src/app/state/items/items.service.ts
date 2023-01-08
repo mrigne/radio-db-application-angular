@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Config } from '../../config/config';
 import { IItem } from '../../reducers/items';
 import { HttpMethod, Requester } from '../requests/requester';
 import { RequesterFactory } from '../requests/requester-factory';
 
 @Injectable({ providedIn: 'root' })
 export class ItemsService {
-    private itemsRequester = this.requesterFactory.createRequester<void, IItem[]>({ url: 'https://localhost:7121/items', method: HttpMethod.GET });
-    private createNewItemRequester = this.requesterFactory.createRequester<IItem, void>({ url: 'https://localhost:7121/item', method: HttpMethod.POST });
-    private updateItemRequester = this.requesterFactory.createRequester<IItem, void>({ url: 'https://localhost:7121/item', method: HttpMethod.PATCH });
-    private deleteItemRequester = this.requesterFactory.createRequester<{ itemId: string }, void>({ url: 'https://localhost:7121/item/{itemId}', method: HttpMethod.DELETE });
+    private itemsRequester = this.requesterFactory.createRequester<void, IItem[]>({ url: `${Config.apiUrl}/items`, method: HttpMethod.GET });
+    private createNewItemRequester = this.requesterFactory.createRequester<IItem, void>({ url: `${Config.apiUrl}/item`, method: HttpMethod.POST });
+    private updateItemRequester = this.requesterFactory.createRequester<IItem, void>({ url: `${Config.apiUrl}/item`, method: HttpMethod.PATCH });
+    private deleteItemRequester = this.requesterFactory.createRequester<{ itemId: string }, void>({ url: `${Config.apiUrl}/item/{itemId}`, method: HttpMethod.DELETE });
 
     constructor(private requesterFactory: RequesterFactory) {
     }
