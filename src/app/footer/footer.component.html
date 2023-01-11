@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="footer">
+<mat-toolbar class="footer">
     <p class="left-right-container">{{ 'footer.appTitle' | translate }}</p>
     <div class="rdb-flex-1 rdb-flex rdb-flex-center rdb-flex-middle rdb-flex-wrap">
         <div class="copyright-line" [innerHTML]="'footer.copyright.line1' | translate : { currentYear: date | date : 'yyyy' }"></div>
@@ -6,16 +6,19 @@
             <span>{{ 'footer.copyright.line2' | translate }}</span>
             <a class="github-link" mat-button href="https://github.com/mrigne" target="_blank" rel="noopener">
                 <div class="rdb-flex rdb-flex-space-between rdb-flex-middle">
-                    <img [height]="18" [width]="18" src="/assets/images/github-mark-white.svg" alt="github-logo">
+                    <img [height]="18" [width]="18" src="/assets/images/github-mark.svg" alt="github-logo">
                     <span class="rdb-margin-left-8">mr_igne</span>
                 </div>
             </a>
         </div>
     </div>
-    <button class="left-right-container" mat-button [matMenuTriggerFor]="languageMenu">
-        <span>{{ translateService.currentLang | rdbLanguageName }}</span>
+    <div class="rdb-flex rdb-flex-middle">
         <mat-icon>language</mat-icon>
-    </button>
+        <span class="rdb-margin-left-8">{{ 'footer.selectLanguage' | translate }}</span>
+        <button class="left-right-container" mat-button [matMenuTriggerFor]="languageMenu">
+            <span>{{ translateService.currentLang | rdbLanguageName }}</span>
+        </button>
+    </div>
     <mat-menu #languageMenu="matMenu">
         <button mat-menu-item *ngFor="let language of languages" (click)="onLanguageChange(language)">{{ language.name }}</button>
     </mat-menu>
