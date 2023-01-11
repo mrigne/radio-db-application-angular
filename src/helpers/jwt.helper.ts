@@ -1,4 +1,5 @@
 import jwtDecode, { JwtPayload } from 'jwt-decode';
+import { isNil } from 'lodash';
 
 export enum JwtClaims {
     name = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
@@ -22,6 +23,17 @@ export class JwtHelper {
             return undefined;
         }
         return new Date(decodedToken.exp * 1000);
+    }
+
+    public static isTokenExpired(token: string, offsetMillis?: number): boolean {
+        if (!token) {
+            return !!token;
+        }
+        const currentDate = new Date();
+        if (!isNil(offsetMillis)) {
+            currentDate.setMilliseconds(currentDate.getMilliseconds() - offsetMillis);
+        }
+        return JwtHelper.getExpiryDate(token) < currentDate;
     }
 
     public static getUserName(token: string): string {

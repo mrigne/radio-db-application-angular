@@ -1,33 +1,33 @@
 <div class="rdb-content-padding">
-    <h3>Add new item</h3>
+    <h3>{{ 'items.createItem.title' | translate }}</h3>
     <form class="rdb-margin-top-32" [formGroup]="form" cdkTrapFocus cdkTrapFocusAutoCapture>
         <p>
             <mat-form-field class="rdb-width-100" appearance="outline">
-                <mat-label>Container Barcode</mat-label>
-                <input #barcodeInput matInput [formControlName]="'containerBarcode'" type="text" cdkFocusInitial>
+                <mat-label>{{ 'items.createItem.inputs.barcode' | translate }}</mat-label>
+                <input #barcodeInput matInput [formControl]="form.controls.containerBarcode" type="text" cdkFocusInitial (keydown.tab)="onTabPressedInBarcode($event)">
                 <mat-icon matIconSuffix>qr_code</mat-icon>
-                <mat-error *ngIf="form.controls.containerBarcode.invalid">{{ getErrorMessageByError(form.controls.containerBarcode) }}</mat-error>
+                <mat-error *ngIf="form.controls.containerBarcode.invalid">{{ validationErrorMessageHelper.getErrorMessageByError(form.controls.containerBarcode) | async }}</mat-error>
             </mat-form-field>
             <mat-form-field class="rdb-width-100" appearance="outline">
-                <mat-label>Container</mat-label>
+                <mat-label>{{ 'items.createItem.inputs.container' | translate }}</mat-label>
                 <mat-select [formControl]="form.controls.containerId" #containerSelect [tabIndex]="barcodeInput?.value && containerSelect?.value ? -1 : 0">
                     <mat-option *ngFor="let container of (containers$ | async)" [value]="container.id">{{ container.name }}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="form.controls.containerId.invalid">{{ getErrorMessageByError(form.controls.containerId) }}</mat-error>
+                <mat-error *ngIf="form.controls.containerId.invalid">{{ validationErrorMessageHelper.getErrorMessageByError(form.controls.containerId) | async }}</mat-error>
             </mat-form-field>
             <mat-form-field class="rdb-width-100" appearance="outline">
-                <mat-label>Item Name</mat-label>
-                <input matInput [formControlName]="'name'" type="text">
-                <mat-error *ngIf="form.controls.name.invalid">{{ getErrorMessageByError(form.controls.name) }}</mat-error>
+                <mat-label>{{ 'items.createItem.inputs.name' | translate }}</mat-label>
+                <input #itemNameInput matInput [formControl]="form.controls.name" type="text">
+                <mat-error *ngIf="form.controls.name.invalid">{{ validationErrorMessageHelper.getErrorMessageByError(form.controls.name) | async }}</mat-error>
             </mat-form-field>
             <mat-form-field class="rdb-width-100" appearance="outline">
-                <mat-label>Count</mat-label>
-                <input matInput [formControlName]="'count'" type="number" [min]="1">
-                <mat-error *ngIf="form.controls.count.invalid">{{ getErrorMessageByError(form.controls.count) }}</mat-error>
+                <mat-label>{{ 'items.createItem.inputs.amount' | translate }}</mat-label>
+                <input matInput [formControl]="form.controls.count" type="number" [min]="1">
+                <mat-error *ngIf="form.controls.count.invalid">{{ validationErrorMessageHelper.getErrorMessageByError(form.controls.count) | async }}</mat-error>
             </mat-form-field>
         </p>
         <div class="rdb-width-100 rdb-flex rdb-flex-end">
-            <button color="primary" type="submit" mat-raised-button [disabled]="form?.invalid" (click)="onAddNewItem()">Add New Item</button>
+            <button color="primary" type="submit" mat-raised-button [disabled]="form?.invalid" (click)="onAddNewItem()">{{ 'items.createItem.addNewItemButton' | translate }}</button>
         </div>
     </form>
 </div>

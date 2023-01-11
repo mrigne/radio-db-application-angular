@@ -1,27 +1,25 @@
-<h3>Add item(s)</h3>
+<h3>{{ 'items.addItem.title' | translate }}</h3>
 <ng-container *ngIf="item$ | async as item">
-    <p class="rdb-margin-top-32">
-        <strong>Item: </strong>
-        <span>{{ item.name }}</span>
-    </p>
-    <p>
-        <strong>Count: </strong>
-        <span>{{ item.count }}</span>
-    </p>
-    <p>
-        <strong>Container: </strong>
-        <span>{{ (container$ | async)?.name }}</span>
-    </p>
+    <rdb-field-value class="rdb-margin-top-32"
+                     label="items.addItem.fields.name"
+                     [value]="item.name">
+    </rdb-field-value>
+    <rdb-field-value label="items.addItem.fields.amount"
+                     [value]="item.count?.toString()">
+    </rdb-field-value>
+    <rdb-field-value label="items.addItem.fields.container"
+                     [value]="(container$ | async)?.name">
+    </rdb-field-value>
     <form class="rdb-margin-top-32" [formGroup]="form">
         <p>
             <mat-form-field class="rdb-width-100" appearance="outline">
-                <mat-label>Count to add</mat-label>
-                <input #countInput matInput [formControlName]="'addCount'" type="number" min="1" (focus)="onFocus()">
-                <mat-error *ngIf="form.controls.addCount.invalid">{{ getErrorMessageByError(form.controls.addCount) }}</mat-error>
+                <mat-label>{{ 'items.addItem.inputs.amountToAdd' | translate }}</mat-label>
+                <input #amountInput matInput [formControl]="form.controls.addAmount" type="number" min="1" (focus)="onFocus()">
+                <mat-error *ngIf="form.controls.addAmount.invalid">{{ validationErrorMessageHelper.getErrorMessageByError(form.controls.addAmount) | async }}</mat-error>
             </mat-form-field>
         </p>
         <div class="rdb-width-100 rdb-flex rdb-flex-end">
-            <button color="primary" type="submit" mat-raised-button [disabled]="form?.invalid" (click)="onAdd()">Add</button>
+            <button color="primary" type="submit" mat-raised-button [disabled]="form?.invalid" (click)="onAdd()">{{ 'common.add' | translate }}</button>
         </div>
     </form>
 </ng-container>

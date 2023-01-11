@@ -1,12 +1,13 @@
 <mat-form-field class="rdb-width-100" appearance="outline">
-    <mat-label>Search</mat-label>
+    <mat-label>{{ label | translate }}</mat-label>
     <input #searchInput
            matInput
            [cdkTrapFocus]="false"
            cdkTrapFocusAutoCapture
            type="text"
-           placeholder="Search by item name, container name or container barcode..."
+           [placeholder]="placeholder | translate"
            (input)="onInput($event)"
-           (focus)="selectAll()">
+           (focus)="selectAll()"
+           (keydown.tab)="onFocusOut($event)">
     <mat-icon matPrefix>search</mat-icon>
 </mat-form-field>

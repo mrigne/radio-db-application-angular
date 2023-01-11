@@ -1,0 +1,143 @@
+{
+    "common": {
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "add": "Add",
+        "eject": "Eject",
+        "save": "Save",
+        "logout": "Log Out"
+    },
+    "login": {
+        "title": "Welcome to Radio DB application",
+        "subTitle": "Please login to proceed",
+        "inputs": {
+            "username": "Username",
+            "password": "Password"
+        },
+        "buttons": {
+            "login": "Login"
+        }
+    },
+    "footer": {
+        "appTitle": "Radio DB",
+        "copyright": {
+            "line1": "Created by <strong>mrigne</strong>. 2023-{currentYear}",
+            "line2": "Github profile: "
+        },
+        "selectLanguage": "Language: "
+    },
+    "items": {
+        "tabName": "Items",
+        "search": {
+            "label": "Search",
+            "placeholder": "Item name, container name or container barcode..."
+        },
+        "columns": {
+            "name": "Name",
+            "amount": "Amount",
+            "container": "Container"
+        },
+        "addItemButton": "Add item",
+        "addItem": {
+            "title": "Add item(s)",
+            "fields": {
+                "name": "Item name",
+                "amount": "Amount",
+                "container": "Container"
+            },
+            "inputs": {
+                "amountToAdd": "Amount to add"
+            },
+            "snackBarMessages": {
+                "successfullyAdded": "{itemName} successfully added.\nAdded amount: {addAmount}"
+            }
+        },
+        "toolTips": {
+            "eject": "Take item(s)",
+            "add": "Add item(s)",
+            "delete": "Delete all items from container"
+        },
+        "noData": "No items found",
+        "createItem": {
+            "title": "Add new item",
+            "inputs": {
+                "barcode": "Container barcode",
+                "container": "Container",
+                "name": "Item name",
+                "amount": "Amount"
+            },
+            "addNewItemButton": "Add new item",
+            "snackBarMessages": {
+                "successfullyAdded": "Item successfully added"
+            }
+        },
+        "deleteItem": {
+            "title": "Delete item",
+            "message": "Are you sure that you want to delete all {itemsAmount, plural, one{# item} other{# items}} ''{itemName}'' from container ''{containerName}''?",
+            "snackBarMessages": {
+                "successfullyDeleted": "{itemName} successfully deleted"
+            }
+        },
+        "ejectItem": {
+            "title": "Eject item(s)",
+            "fields": {
+                "name": "Item name",
+                "amount": "Amount",
+                "container": "Container"
+            },
+            "inputs": {
+                "amountToEject": "Amount to eject"
+            },
+            "snackBarMessages": {
+                "successfullyEjected": "{itemName} successfully ejected. Ejected amount: {ejectAmount}",
+                "successfullyEjectedAndDeleted": "{itemName} successfully ejected. As all items were ejected - it was deleted from container."
+            }
+        }
+    },
+    "containers": {
+        "tabName": "Containers",
+        "columns": {
+            "name": "Name",
+            "barcode": "Barcode",
+            "itemsAmount": "Items #"
+        },
+        "toolTips": {
+            "edit": "Edit container",
+            "delete": "Delete container with all items",
+            "showItemsInContainer": "Show all items in container"
+        },
+        "addContainerButton": "Add container",
+        "noData": "No containers found",
+        "createContainer": {
+            "title": "Add new container",
+            "inputs": {
+                "barcode": "Container barcode",
+                "name": "Container name"
+            },
+            "addContainerButton": "Add container",
+            "snackBarMessages": {
+                "successfullyAdded": "Container successfully added",
+                "successfullyUpdated": "Container successfully updated"
+            }
+        },
+        "editContainer": {
+            "title": "Edit container details",
+            "saveContainerButton": "Save"
+        },
+        "deleteContainer": {
+            "title": "Delete container",
+            "description": "Are you sure that you want to delete container { containerName } with all items in it?",
+            "snackBarMessages": {
+                "successfullyDeleted": "''{containerName}'' container successfully deleted."
+            }
+        }
+    },
+    "formErrors": {
+        "required": "Field is required",
+        "minlength": "Minimal length is {requiredLength, plural, one{# symbol} other{# symbols}}",
+        "max": "Maximum amount is {max}",
+        "min": "Minimal amount is {min}",
+        "barcode": "Container with entered barcode already exists",
+        "containerWithEnteredBarcodeNotExist": "Container with entered barcode not exists"
+    }
+}

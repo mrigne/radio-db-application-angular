@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Config } from '../../config/config';
 import { IItem } from '../../reducers/items';
-import { HttpMethod, Requester } from '../requests/requester';
+import { HttpMethod } from '../requests/requester';
 import { RequesterFactory } from '../requests/requester-factory';
 
 @Injectable({ providedIn: 'root' })

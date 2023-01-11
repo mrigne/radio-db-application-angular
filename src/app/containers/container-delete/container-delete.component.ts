@@ -20,7 +20,12 @@ export class ContainerDeleteComponent {
             filter(container => isNil(container)),
             take(1),
             tap(() => {
-                this.snackbarService.showSuccessSnackbar(`'${this.containerData.name}' container successfully deleted.`);
+                this.snackbarService.showSuccessSnackbar(
+                    'containers.deleteContainer.snackBarMessages.successfullyDeleted',
+                    {
+                        containerName: this.containerData.name
+                    }
+                );
                 this.dialogRef.close();
             })
         ).subscribe();

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Config } from '../../config/config';
 import { HttpMethod } from '../requests/requester';
 import { RequesterFactory } from '../requests/requester-factory';
@@ -22,10 +22,19 @@ export class AuthService {
         url: `${Config.apiUrl}/login`,
         method: HttpMethod.POST
     });
+    public refreshTokenRequester = this.requesterFactory.createRequester<ISignInResponse, ISignInResponse>({
+        url: `${Config.apiUrl}/refresh`,
+        method: HttpMethod.POST
+    });
+
     constructor(private requesterFactory: RequesterFactory, private cookieService: CookieService) {
     }
 
     public signin(signinPayload: ISignInRequest): Observable<ISignInResponse> {
         return this.signinRequester.runRequest(signinPayload);
+    }
+
+    public refreshToken(authToken: string): Observable<ISignInResponse> {
+        return this.refreshTokenRequester.runRequest({ token: authToken });
     }
 }

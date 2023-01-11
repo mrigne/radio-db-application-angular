@@ -1,0 +1,40 @@
+<rdb-content-with-sidenav [routeForClose]="appRoutes.containers.full()">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>{{ 'containers.columns.name' | translate }}</th>
+            <td *matCellDef="let container">{{ container.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="barcode">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>{{ 'containers.columns.barcode' | translate }}</th>
+            <td *matCellDef="let container">{{ container.barcode }}</td>
+        </ng-container>
+        <ng-container matColumnDef="itemsAmount">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>{{ 'containers.columns.itemsAmount' | translate }}</th>
+            <td *matCellDef="let container">{{ container.itemsAmount }}</td>
+        </ng-container>
+        <ng-container matColumnDef="menu">
+            <th class="rdb-text-align-right" mat-header-cell *matHeaderCellDef>
+                <button class="rdb-nowrap" color="primary" mat-raised-button [routerLink]="appRoutes.containers.add.full()">
+                    <span>{{ 'containers.addContainerButton' | translate }}</span>
+                    <mat-icon matIconPrefix>add</mat-icon>
+                </button>
+            </th>
+            <td class="rdb-text-align-right rdb-nowrap" *matCellDef="let container">
+                <button [routerLink]="appRoutes.containers.containerId.edit.full(container.id)" class="rdb-inline" mat-icon-button [matTooltip]="'containers.toolTips.edit' | translate">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button (click)="onDelete(container)" class="rdb-inline" mat-icon-button [matTooltip]="'containers.toolTips.delete' | translate">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button [routerLink]="appRoutes.items.full()" [queryParams]="{ search: container.barcode }" class="rdb-inline" mat-icon-button [matTooltip]="'containers.toolTips.showItemsInContainer' | translate">
+                    <mat-icon>format_list_bulleted</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['name', 'barcode', 'itemsAmount', 'menu']; sticky: true"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: ['name', 'barcode', 'itemsAmount', 'menu']"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell no-data-cell" colspan="4">{{ 'containers.noData' | translate }}</td>
+        </tr>
+    </table>
+</rdb-content-with-sidenav>

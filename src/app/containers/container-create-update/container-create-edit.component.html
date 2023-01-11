@@ -1,23 +1,23 @@
 <div class="rdb-content-padding">
-    <h3>{{ (container$ | async) ? 'Edit container details' : 'Add new container' }}</h3>
+    <h3>{{ ((container$ | async) ? 'containers.editContainer.title' : 'containers.createContainer.title') | translate }}</h3>
     <form class="rdb-margin-top-32" [formGroup]="form" cdkTrapFocus cdkTrapFocusAutoCapture>
         <p>
             <mat-form-field class="rdb-width-100" appearance="outline">
-                <mat-label>Container Barcode</mat-label>
-                <input matInput [formControlName]="'barcode'" type="text" cdkFocusInitial>
+                <mat-label>{{ 'containers.createContainer.inputs.barcode' | translate }}</mat-label>
+                <input matInput [formControl]="form.controls.barcode" type="text" cdkFocusInitial>
                 <mat-icon matIconSuffix>qr_code</mat-icon>
-                <mat-error *ngIf="form.controls.barcode.invalid">{{ getErrorMessageByError(form.controls.barcode) }}</mat-error>
+                <mat-error *ngIf="form.controls.barcode.invalid">{{ validationErrorMessageHelper.getErrorMessageByError(form.controls.barcode) | async }}</mat-error>
             </mat-form-field>
             <mat-form-field class="rdb-width-100" appearance="outline">
-                <mat-label>Container Name</mat-label>
-                <input matInput [formControlName]="'name'" type="text">
-                <mat-error *ngIf="form.controls.name.invalid">{{ getErrorMessageByError(form.controls.name) }}</mat-error>
+                <mat-label>{{ 'containers.createContainer.inputs.name' | translate }}</mat-label>
+                <input matInput [formControl]="form.controls.name" type="text">
+                <mat-error *ngIf="form.controls.name.invalid">{{ validationErrorMessageHelper.getErrorMessageByError(form.controls.name) | async }}</mat-error>
             </mat-form-field>
         </p>
         <div class="rdb-width-100 rdb-flex rdb-flex-end">
-            <button *ngIf="container$ | async; else addButton" color="primary" type="submit" mat-raised-button [disabled]="form?.invalid" (click)="onUpdateContainer()">{{ 'Save' }}</button>
+            <button *ngIf="container$ | async; else addButton" color="primary" type="submit" mat-raised-button [disabled]="form?.invalid" (click)="onUpdateContainer()">{{ 'containers.editContainer.saveContainerButton' | translate }}</button>
             <ng-template #addButton>
-                <button color="primary" type="submit" mat-raised-button [disabled]="form?.invalid" (click)="onCreateContainer()">{{ 'Add' }}</button>
+                <button color="primary" type="submit" mat-raised-button [disabled]="form?.invalid" (click)="onCreateContainer()">{{ 'containers.createContainer.addContainerButton' | translate }}</button>
             </ng-template>
         </div>
     </form>

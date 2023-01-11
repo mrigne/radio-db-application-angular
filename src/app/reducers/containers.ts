@@ -7,6 +7,7 @@ import {
     on,
     props
 } from '@ngrx/store';
+import { keyBy } from 'lodash';
 
 export const containersActions = createActionGroup({
     source: 'Containers',
@@ -36,6 +37,11 @@ export const containersSelector = createSelector(
     featureSelector,
     state => state
 );
+
+export const containersCollectionByIdSelector = createSelector(
+    containersSelector,
+    state => keyBy(state, 'id')
+)
 
 export const containerByIdSelector = (containerId: string) => createSelector(
     containersSelector,

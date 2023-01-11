@@ -1,8 +1,10 @@
-<h3>Delete item</h3>
-<p class="rdb-margin-top-32">
-    Are you sure that you want to delete all {{ itemData.count }} items '{{ itemData.name }}' from container {{ (container$ | async)?.name }}
-</p>
-<div class="rdb-margin-top-32 rdb-width-100 rdb-flex rdb-flex-end">
-    <button mat-raised-button (click)="onCancel()">Cancel</button>
-    <button class="rdb-margin-left-16" color="accent" type="submit" mat-raised-button (click)="onDelete()">Delete</button>
-</div>
+<h3>{{ 'items.deleteItem.title' | translate }}</h3>
+<ng-container *ngIf="itemData">
+    <p class="rdb-margin-top-32">
+        {{ 'items.deleteItem.message' | translate : { itemsAmount: itemData?.count, itemName: itemData?.name, containerName: (container$ | async)?.name } }}
+    </p>
+    <div class="rdb-margin-top-32 rdb-width-100 rdb-flex rdb-flex-end">
+        <button mat-raised-button (click)="onCancel()">{{ 'common.cancel' | translate }}</button>
+        <button class="rdb-margin-left-16" color="accent" type="submit" mat-raised-button (click)="onDelete()">{{ 'common.delete' | translate }}</button>
+    </div>
+</ng-container>

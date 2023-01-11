@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { isEqual, omit } from 'lodash';
+import { isEmpty, isEqual, omit } from 'lodash';
 import {
     combineLatest,
     distinctUntilChanged,
@@ -16,25 +16,24 @@ import {
 } from 'rxjs';
 import { SnackbarService } from '../../../helpers/services/snackbar.service';
 import { SubscriptionsHelper } from '../../../helpers/subscriptions.helper';
-import { getErrorMessageByError } from '../../../helpers/validation-error-message.helper';
+import { ValidationErrorMessageHelper } from '../../../helpers/validation-error-message.helper';
 import { containerByIdSelector, containersActions, containersSelector, IContainer } from '../../reducers/containers';
-import { itemsSelectorById } from '../../reducers/items';
 import { AppRoutes } from '../../routes/app.routes';
 import { RouteParams } from '../../routes/route.params';
 import { routerSelectors } from '../../routes/router.selectors';
 import { ContainersService } from '../../state/containers/containers.service';
+
+export interface ICreateUpdateContainerForm {
+    name: FormControl<string>;
+    barcode: FormControl<string>;
+}
 
 @Component({
     selector: 'rdb-container-create',
     templateUrl: './container-create-edit.component.html'
 })
 export class ContainerCreateEditComponent implements OnInit, OnDestroy {
-    public readonly getErrorMessageByError = getErrorMessageByError;
-
-    public form = this.fb.group<{
-        name: FormControl<string>,
-        barcode: FormControl<string>
-    }>({
+    public form = this.fb.group<ICreateUpdateContainerForm>({
         name: new FormControl<string>('', Validators.required),
         barcode: new FormControl<string>('', Validators.required)
     });
@@ -60,7 +59,8 @@ export class ContainerCreateEditComponent implements OnInit, OnDestroy {
 
     private subscriptions: Subscription[] = [];
 
-    constructor(private containersService: ContainersService,
+    constructor(public validationErrorMessageHelper: ValidationErrorMessageHelper,
+                private containersService: ContainersService,
                 private store: Store,
                 private fb: FormBuilder,
                 private snackbarService: SnackbarService,
@@ -86,9 +86,8 @@ export class ContainerCreateEditComponent implements OnInit, OnDestroy {
                         });
                     } else {
                         if (this.form.controls.barcode.hasError('barcode')) {
-                            this.form.controls.barcode.setErrors({
-                                ...omit(this.form.controls.barcode.errors || {}, 'barcode')
-                            });
+                            const errorsWithoutBarcodeError = omit(this.form.controls.barcode.errors || {}, 'barcode');
+                            this.form.controls.barcode.setErrors(isEmpty(errorsWithoutBarcodeError) ? null : errorsWithoutBarcodeError);
                         }
                     }
                 })
@@ -101,7 +100,7 @@ export class ContainerCreateEditComponent implements OnInit, OnDestroy {
             filter(containers => containers?.some(container => container.barcode === this.form.controls.barcode.value)),
             take(1),
             tap(() => {
-                this.snackbarService.showSuccessSnackbar('Container successfully added');
+                this.snackbarService.showSuccessSnackbar('containers.createContainer.snackBarMessages.successfullyAdded');
                 this.router.navigateByUrl(AppRoutes.containers.full());
             })
         ).subscribe();
@@ -124,7 +123,7 @@ export class ContainerCreateEditComponent implements OnInit, OnDestroy {
                     filter(newContainerFromStore => isEqual(newContainerFromStore, updatedContainer)),
                     take(1),
                     tap(() => {
-                        this.snackbarService.showSuccessSnackbar('Container successfully updated');
+                        this.snackbarService.showSuccessSnackbar('containers.createContainer.snackBarMessages.successfullyUpdated');
                         this.router.navigateByUrl(AppRoutes.containers.full());
                     })
                 ).subscribe();

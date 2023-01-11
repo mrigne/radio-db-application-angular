@@ -43,6 +43,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     align-items: flex-end;
 }
 
+.rdb-flex-wrap {
+    flex-wrap: wrap;
+}
+
 .rdb-margin-top-16 {
     margin-top: 16px;
 }
@@ -81,6 +85,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .rdb-inline {
     display: inline;
+}
+
+.rdb-inline-flex {
+    display: inline-flex;
 }
 
 .rdb-height-100 {
@@ -130,4 +138,8 @@ mat-sidenav {
 
 .mat-mdc-button.cdk-program-focused:hover span.mat-mdc-button-persistent-ripple:before {
     opacity: 0.04 !important;
+}
+
+.mat-mdc-button-touch-target {
+    height: 36px !important;
 }

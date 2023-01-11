@@ -27,7 +27,12 @@ export class ItemDeleteComponent implements OnInit {
             filter(item => isNil(item)),
             take(1),
             tap(() => {
-                this.snackbarService.showSuccessSnackbar(`${this.itemData.name} successfully deleted.`);
+                this.snackbarService.showSuccessSnackbar(
+                    'items.deleteItem.snackBarMessages.successfullyDeleted',
+                    {
+                        itemName: this.itemData?.name
+                    }
+                );
                 this.dialogRef.close();
             })
         ).subscribe();

@@ -1,0 +1,32 @@
+<div class="full-height-container rdb-flex rdb-flex-center rdb-flex-middle rdb-flex-column">
+    <div class="login-form-container rdb-flex rdb-flex-column rdb-flex-center rdb-flex-middle">
+        <div class="rdb-flex rdb-flex-center rdb-width-100">
+            <img alt="logo" class="logo" src="/assets/images/logo.svg">
+        </div>
+        <h2 class="rdb-text-align-center rdb-width-100">{{ 'login.title' | translate }}</h2>
+        <h2 class="rdb-text-align-center rdb-width-100">{{ 'login.subTitle' | translate }}</h2>
+        <form class="rdb-width-100" [formGroup]="form">
+            <p>
+                <mat-form-field class="rdb-width-100">
+                    <mat-label>{{ 'login.inputs.username' | translate }}</mat-label>
+                    <input matInput [formControl]="form.controls.userName" type="text">
+                    <mat-error *ngIf="form.controls.userName.invalid">{{ validationErrorMessageHelper.getErrorMessageByError(form.controls.userName) | async }}</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="rdb-width-100">
+                    <mat-label>{{ 'login.inputs.password' | translate }}</mat-label>
+                    <input matInput [formControl]="form.controls.password" [type]="(hidePassword$ | async) ? 'password' : 'text'">
+                    <button type="button" mat-icon-button matSuffix (click)="toggleHidePassword()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword$ | async">
+                        <mat-icon>{{(hidePassword$ | async) ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="form.controls.password.invalid">{{ validationErrorMessageHelper.getErrorMessageByError(form.controls.password) | async }}</mat-error>
+                </mat-form-field>
+            </p>
+            <div class="rdb-width-100 rdb-flex rdb-flex-end">
+                <button color="primary" type="submit" mat-raised-button [disabled]="form.invalid || form.pristine" (click)="onLogin()">{{ 'login.buttons.login' | translate }}</button>
+            </div>
+        </form>
+    </div>
+</div>
+<rdb-footer></rdb-footer>

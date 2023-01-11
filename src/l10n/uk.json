@@ -1,0 +1,143 @@
+{
+    "common": {
+        "delete": "Видалити",
+        "cancel": "Відмінити",
+        "add": "Додати",
+        "eject": "Вилучити",
+        "save": "Зберегти",
+        "logout": "Вийти"
+    },
+    "login": {
+        "title": "Вітаю в Radio DB застосунку",
+        "subTitle": "Будь-ласка, ввійдіть щоб продовжити",
+        "inputs": {
+            "username": "Ім'я користувача",
+            "password": "Пароль"
+        },
+        "buttons": {
+            "login": "Ввійти"
+        }
+    },
+    "footer": {
+        "appTitle": "Radio DB",
+        "copyright": {
+            "line1": "Створено <strong>mrigne</strong>. 2023-{currentYear}",
+            "line2": "Github профіль: "
+        },
+        "selectLanguage": "Мова: "
+    },
+    "items": {
+        "tabName": "Предмети",
+        "search": {
+            "label": "Пошук",
+            "placeholder": "Назва предмета, назва контейнера або штрихкод контейнера..."
+        },
+        "columns": {
+            "name": "Назва",
+            "amount": "Кількість",
+            "container": "Контейнер"
+        },
+        "addItemButton": "Додати предмет",
+        "addItem": {
+            "title": "Додати предмет(и)",
+            "fields": {
+                "name": "Назва предмета",
+                "amount": "Кількість",
+                "container": "Контайнер"
+            },
+            "inputs": {
+                "amountToAdd": "Скільки додати?"
+            },
+            "snackBarMessages": {
+                "successfullyAdded": "{itemName} доданий успішно.\nДодана кількість: {addAmount}"
+            }
+        },
+        "toolTips": {
+            "eject": "Вилучити предмет(и)",
+            "add": "Додати предмет(и)",
+            "delete": "Видалити всі предмети з контейнера"
+        },
+        "noData": "Предметів не знайдено",
+        "createItem": {
+            "title": "Додати новий предмет",
+            "inputs": {
+                "barcode": "Штрихкод контейнера",
+                "container": "Контейнер",
+                "name": "Назва предмета",
+                "amount": "Кількість"
+            },
+            "addNewItemButton": "Додати новий предмет",
+            "snackBarMessages": {
+                "successfullyAdded": "Предмет успішно додано"
+            }
+        },
+        "deleteItem": {
+            "title": "Видалити предмет",
+            "message": "Ви впевнені, що хочете видалити {itemsAmount, plural, one{# предмет} few{всі # предмета} many{всі # предметів} other{всі # предмета}} ''{itemName}'' з контейнера ''{containerName}''?",
+            "snackBarMessages": {
+                "successfullyDeleted": "{itemName} успішно видалено"
+            }
+        },
+        "ejectItem": {
+            "title": "Вилучити предмет(и)",
+            "fields": {
+                "name": "Назва предмета",
+                "amount": "Кількість",
+                "container": "Контейнер"
+            },
+            "inputs": {
+                "amountToEject": "Скільки вилучити?"
+            },
+            "snackBarMessages": {
+                "successfullyEjected": "{itemName} успішно вилучено з контейнера. Кількість: {ejectAmount}",
+                "successfullyEjectedAndDeleted": "{itemName} успішно вилучено з контейнера. Так як всі предмети були вилучені - предмет видалено з контейнера."
+            }
+        }
+    },
+    "containers": {
+        "tabName": "Контейнери",
+        "columns": {
+            "name": "Назва",
+            "barcode": "Штрихкод",
+            "itemsAmount": "Кількість предметів"
+        },
+        "toolTips": {
+            "edit": "Редагувати контейнер",
+            "delete": "Видалити контейнер разом з усіма предметами всередині",
+            "showItemsInContainer": "Показати предмети в цьому контейнері"
+        },
+        "addContainerButton": "Додати новий контейнер",
+        "noData": "Контейнерів не знайдено",
+        "createContainer": {
+            "title": "Додати новий контейнер",
+            "inputs": {
+                "barcode": "Штрихкод контейнера",
+                "name": "Назва контейнера"
+            },
+            "addContainerButton": "Додати контейнер",
+            "snackBarMessages": {
+                "successfullyAdded": "Контейнер успішно додано",
+                "successfullyUpdated": "Контейнер успішно оновлено"
+            }
+        },
+        "editContainer": {
+            "title": "Редагування контейнера",
+            "saveContainerButton": "Зберегти"
+        },
+        "deleteContainer": {
+            "title": "Видалити контейнер",
+            "description": "Ви впевнені, що хочете видалити контейнер {containerName} разом з усіма предметами всередині?",
+            "snackBarMessages": {
+                "successfullyDeleted": "''{containerName}'' контейнер був успішно видалений"
+            }
+        }
+    },
+    "formErrors": {
+        "required": "Обов'язкове поле",
+        "minlength": "Мінімальна довжина {requiredLength, plural, one{# символ} few{# символи} many{# символів} other{# символа}}",
+        "max": "Максимальна кількість {max}",
+        "min": "Мінімальна кількість {min}",
+        "barcode": "Контейнер з таким штрихкодом вже існує",
+        "containerWithEnteredBarcodeNotExist": "Контейнера з таким штрихкодом не існує"
+    }
+}

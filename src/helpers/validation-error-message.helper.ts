@@ -1,20 +1,17 @@
+import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { isObject } from 'lodash';
+import { Observable } from 'rxjs';
 
-export const getErrorMessageByError = (control: AbstractControl): string => {
-    const errorKey = Object.keys(control.errors || {}).filter(key => control.errors?.[key])?.[0];
-    const error = control.errors[errorKey];
-    switch (errorKey) {
-        case 'required':
-            return 'Field is required';
-        case 'minlength':
-            return `Minimal length is ${error['requiredLength']}`;
-        case 'max':
-            return `Maximum amount is ${error['max']}`;
-        case 'min':
-            return `Minimal amount is ${error['min']}`;
-        case 'barcode':
-            return 'Container with entered barcode already exists'
-        default:
-            return '';
+@Injectable({ providedIn: 'root' })
+export class ValidationErrorMessageHelper {
+    constructor(private translateService: TranslateService) {
+    }
+
+    public getErrorMessageByError(control: AbstractControl): Observable<string> {
+        const errorKey = Object.keys(control.errors || {}).filter(key => control.errors?.[key])?.[0];
+        const error = isObject(control.errors[errorKey]) ? control.errors[errorKey] : {};
+        return this.translateService.stream(`formErrors.${errorKey}`, error);
     }
 }

@@ -1,16 +1,19 @@
-import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { distinctUntilChanged, filter, map, shareReplay, switchMap, take, tap } from 'rxjs';
+import { distinctUntilChanged, filter, shareReplay, switchMap, take, tap } from 'rxjs';
 import { SnackbarService } from '../../../helpers/services/snackbar.service';
-import { getErrorMessageByError } from '../../../helpers/validation-error-message.helper';
-import { containerByIdSelector, containersActions, containersSelector } from '../../reducers/containers';
-import { IItem, itemsActions, itemsSelector, itemsSelectorById } from '../../reducers/items';
+import { ValidationErrorMessageHelper } from '../../../helpers/validation-error-message.helper';
+import { containerByIdSelector, containersActions } from '../../reducers/containers';
+import { itemsActions, itemsSelector, itemsSelectorById } from '../../reducers/items';
 import { AppRoutes } from '../../routes/app.routes';
 import { RouteParams } from '../../routes/route.params';
 import { routerSelectors } from '../../routes/router.selectors';
+
+export interface IEjectItemForm {
+    ejectAmount: FormControl<number>;
+}
 
 @Component({
     selector: 'rdb-item-eject',
@@ -18,13 +21,11 @@ import { routerSelectors } from '../../routes/router.selectors';
     styleUrls: ['./item-eject.component.scss']
 })
 export class ItemEjectComponent implements OnInit {
-    public readonly getErrorMessageByError = getErrorMessageByError;
+    @ViewChild('amountInput', { static: false })
+    public amountInput: ElementRef;
 
-    @ViewChild('countInput', { static: false })
-    public countInput: ElementRef;
-
-    public form = this.fb.group({
-        ejectCount: new FormControl<number>(1, [Validators.required, Validators.min(1)])
+    public form = this.fb.group<IEjectItemForm>({
+        ejectAmount: new FormControl<number>(1, [Validators.required, Validators.min(1)])
     });
 
     public item$ = this.store.select(routerSelectors.selectRouteParam(RouteParams.itemId)).pipe(
@@ -34,8 +35,8 @@ export class ItemEjectComponent implements OnInit {
         }),
         filter(Boolean),
         tap(item => {
-            this.form.controls.ejectCount.setValidators([Validators.required, Validators.min(1), Validators.max(item.count)]);
-            this.form.controls.ejectCount.updateValueAndValidity();
+            this.form.controls.ejectAmount.setValidators([Validators.required, Validators.min(1), Validators.max(item.count)]);
+            this.form.controls.ejectAmount.updateValueAndValidity();
         }),
         shareReplay({
             bufferSize: 1,
@@ -49,7 +50,11 @@ export class ItemEjectComponent implements OnInit {
         })
     );
 
-    constructor(private store: Store, private fb: FormBuilder, private router: Router, private snackbarService: SnackbarService) {
+    constructor(public validationErrorMessageHelper: ValidationErrorMessageHelper,
+                private store: Store,
+                private fb: FormBuilder,
+                private router: Router,
+                private snackbarService: SnackbarService) {
     }
 
     public ngOnInit(): void {
@@ -60,30 +65,41 @@ export class ItemEjectComponent implements OnInit {
         this.item$.pipe(
             take(1),
             tap(item => {
-                if (this.form.value.ejectCount === item.count) {
+                if (this.form.value.ejectAmount === item.count) {
                     this.store.dispatch(itemsActions.deleteItemById({ itemId: item.id }));
                     this.store.select(itemsSelector).pipe(
                         filter(items => Array.isArray(items) && !items.some(itemFromStore => itemFromStore.id === item.id)),
                         take(1),
                         tap(() => {
-                            this.snackbarService.showSuccessSnackbar(`${item.name} successfully ejected. As all items were ejected - it was deleted from container.`);
+                            this.snackbarService.showSuccessSnackbar(
+                                'items.ejectItem.snackBarMessages.successfullyEjectedAndDeleted',
+                                {
+                                    itemName: item?.name
+                                }
+                            );
                             this.router.navigateByUrl(AppRoutes.items.full());
                         })
                     ).subscribe();
                 } else {
-                    const newCount = item.count - this.form.value.ejectCount;
+                    const newAmount = item.count - this.form.value.ejectAmount;
                     this.store.select(itemsSelectorById(item.id)).pipe(
-                        filter(item => item.count === newCount),
+                        filter(item => item.count === newAmount),
                         take(1),
                         tap(() => {
-                            this.snackbarService.showSuccessSnackbar(`${item.name} successfully ejected. Ejected count: ${this.form.value.ejectCount}`);
+                            this.snackbarService.showSuccessSnackbar(
+                                'items.ejectItem.snackBarMessages.successfullyEjected',
+                                {
+                                    itemName: item?.name,
+                                    ejectAmount: this.form.value.ejectAmount
+                                }
+                            );
                             this.router.navigateByUrl(AppRoutes.items.full());
                         })
                     ).subscribe();
                     this.store.dispatch(itemsActions.updateItemById({
                         newItem: {
                             ...item,
-                            count: newCount
+                            count: newAmount
                         }
                     }));
                 }
@@ -92,6 +108,6 @@ export class ItemEjectComponent implements OnInit {
     }
 
     public onFocus(): void {
-        this.countInput.nativeElement.select();
+        this.amountInput.nativeElement.select();
     }
 }

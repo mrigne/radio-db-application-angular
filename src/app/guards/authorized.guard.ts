@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { JwtHelper } from '../../helpers/jwt.helper';
 import { AUTH_LOCAL_STORAGE_NAME } from '../state/auth/auth.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthorizedGuard implements CanActivateChild {
     constructor(private router: Router, private cookieService: CookieService) {
     }

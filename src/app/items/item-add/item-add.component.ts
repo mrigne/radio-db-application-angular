@@ -4,12 +4,16 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter, shareReplay, switchMap, take, tap } from 'rxjs';
 import { SnackbarService } from '../../../helpers/services/snackbar.service';
-import { getErrorMessageByError } from '../../../helpers/validation-error-message.helper';
+import { ValidationErrorMessageHelper } from '../../../helpers/validation-error-message.helper';
 import { containerByIdSelector, containersActions } from '../../reducers/containers';
 import { itemsActions, itemsSelectorById } from '../../reducers/items';
 import { AppRoutes } from '../../routes/app.routes';
 import { RouteParams } from '../../routes/route.params';
 import { routerSelectors } from '../../routes/router.selectors';
+
+export interface IAddItemForm {
+    addAmount: FormControl<number>;
+}
 
 @Component({
     selector: 'rdb-item-add',
@@ -17,15 +21,11 @@ import { routerSelectors } from '../../routes/router.selectors';
     styleUrls: ['./item-add.component.scss']
 })
 export class ItemAddComponent implements OnInit {
-    public readonly getErrorMessageByError = getErrorMessageByError;
+    @ViewChild('amountInput', { static: false })
+    public amountInput: ElementRef;
 
-    @ViewChild('countInput', { static: false })
-    public countInput: ElementRef;
-
-    public form = this.fb.group<{
-        addCount: FormControl<number>
-    }>({
-        addCount: new FormControl<number>(1, [Validators.required, Validators.min(1)])
+    public form = this.fb.group<IAddItemForm>({
+        addAmount: new FormControl<number>(1, [Validators.required, Validators.min(1)])
     });
 
     public item$ = this.store.select(routerSelectors.selectRouteParam(RouteParams.itemId)).pipe(
@@ -45,7 +45,11 @@ export class ItemAddComponent implements OnInit {
         })
     );
 
-    constructor(private store: Store, private fb: FormBuilder, private router: Router, private snackbarService: SnackbarService) {
+    constructor(public validationErrorMessageHelper: ValidationErrorMessageHelper,
+                private store: Store,
+                private fb: FormBuilder,
+                private router: Router,
+                private snackbarService: SnackbarService) {
     }
 
     public ngOnInit(): void {
@@ -56,13 +60,16 @@ export class ItemAddComponent implements OnInit {
         this.item$.pipe(
             take(1),
             tap(item => {
-                const newCount = item.count + this.form.value.addCount;
+                const newAmount = item.count + this.form.value.addAmount;
 
                 this.store.select(itemsSelectorById(item?.id)).pipe(
-                    filter(item => item.count === newCount),
+                    filter(item => item.count === newAmount),
                     take(1),
                     tap(() => {
-                        this.snackbarService.showSuccessSnackbar(`${item?.name} successfully added. Added count: ${this.form.value.addCount}`);
+                        this.snackbarService.showSuccessSnackbar('items.addItem.snackBarMessages.successfullyAdded', {
+                            itemName: item?.name,
+                            addAmount: this.form.value.addAmount
+                        });
                         this.router.navigateByUrl(AppRoutes.items.full());
                     })
                 ).subscribe();
@@ -70,7 +77,7 @@ export class ItemAddComponent implements OnInit {
                 this.store.dispatch(itemsActions.updateItemById({
                     newItem: {
                         ...item,
-                        count: newCount
+                        count: newAmount
                     }
                 }));
             })
@@ -78,6 +85,6 @@ export class ItemAddComponent implements OnInit {
     }
 
     public onFocus(): void {
-        this.countInput.nativeElement.select();
+        this.amountInput.nativeElement.select();
     }
 }

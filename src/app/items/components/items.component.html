@@ -1,0 +1,45 @@
+<rdb-content-with-sidenav [routeForClose]="appRoutes.items.full()">
+    <rdb-search class="search"
+                [label]="'items.search.label' | translate"
+                [placeholder]="'items.search.placeholder' | translate"
+                [queryParamName]="searchQueryParam"
+                [goBackToSearchAndSelectAllOnFocusOutByTabKey]="true"></rdb-search>
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell mat-sort-header="name" *matHeaderCellDef>{{ 'items.columns.name' | translate }}</th>
+            <td *matCellDef="let item">{{ item.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+            <th mat-header-cell mat-sort-header="amount" *matHeaderCellDef>{{ 'items.columns.amount' | translate }}</th>
+            <td *matCellDef="let item">{{ item.count }}</td>
+        </ng-container>
+        <ng-container matColumnDef="container">
+            <th mat-header-cell mat-sort-header="container" *matHeaderCellDef>{{ 'items.columns.container' | translate }}</th>
+            <td *matCellDef="let item">{{ item.container?.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="menu">
+            <th class="rdb-text-align-right" mat-header-cell *matHeaderCellDef>
+                <button color="primary" class="rdb-nowrap" mat-raised-button [routerLink]="appRoutes.items.add.full()">
+                    <span>{{ 'items.addItemButton' | translate }}</span>
+                    <mat-icon matIconPrefix>add</mat-icon>
+                </button>
+            </th>
+            <td class="rdb-text-align-right rdb-nowrap" *matCellDef="let item">
+                <button [routerLink]="appRoutes.items.itemId.eject.full(item.id)" class="rdb-inline" mat-icon-button [matTooltip]="'items.toolTips.eject' | translate">
+                    <mat-icon>eject</mat-icon>
+                </button>
+                <button [routerLink]="appRoutes.items.itemId.add.full(item.id)" class="rdb-inline" mat-icon-button [matTooltip]="'items.toolTips.add' | translate">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button (click)="onDelete(item)" class="rdb-inline" mat-icon-button [matTooltip]="'items.toolTips.delete' | translate">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['name', 'amount', 'container', 'menu']; sticky: true"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: ['name', 'amount', 'container', 'menu']"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell no-data-cell" colspan="4">{{ 'items.noData' | translate }}</td>
+        </tr>
+    </table>
+</rdb-content-with-sidenav>

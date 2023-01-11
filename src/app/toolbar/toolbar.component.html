@@ -3,13 +3,13 @@
         <a class="rdb-flex rdb-flex-middle" [routerLink]="appRoutes.items.full()" tabindex="-1">
             <img class="toolbar-logo" src="/assets/images/logo.svg" alt="logo">
         </a>
-        <button class="rdb-with-margins rdb-margin-left-24" mat-button [routerLink]="'items'" [routerLinkActive]="'active-link'" [disableRipple]="true">
+        <button class="rdb-with-margins rdb-margin-left-16" mat-button [routerLink]="appRoutes.items.full()" [routerLinkActive]="'active-link'" [disableRipple]="true">
             <mat-icon>memory</mat-icon>
-            <span>Items</span>
+            <span>{{ 'items.tabName' | translate }}</span>
         </button>
-        <button class="rdb-with-margins" mat-button [routerLink]="'containers'" [routerLinkActive]="'active-link'" [disableRipple]="true">
+        <button class="rdb-with-margins" mat-button [routerLink]="appRoutes.containers.full()" [routerLinkActive]="'active-link'" [disableRipple]="true">
             <mat-icon>inventory_2</mat-icon>
-            <span>Containers</span>
+            <span>{{ 'containers.tabName' | translate }}</span>
         </button>
     </div>
     <div class="rdb-flex rdb-flex-middle">
@@ -18,9 +18,9 @@
             <mat-icon iconPositionEnd>menu</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button (click)="onLogOut()" mat-menu-item>
                 <mat-icon>logout</mat-icon>
-                <span>Logout</span>
+                <span>{{ 'common.logout' | translate }}</span>
             </button>
         </mat-menu>
     </div>
