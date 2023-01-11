@@ -12,10 +12,10 @@
             </a>
         </div>
     </div>
-    <div class="rdb-flex rdb-flex-middle">
+    <div class="left-right-container rdb-flex rdb-flex-middle">
         <mat-icon>language</mat-icon>
         <span class="rdb-margin-left-8">{{ 'footer.selectLanguage' | translate }}</span>
-        <button class="left-right-container" mat-button [matMenuTriggerFor]="languageMenu">
+        <button mat-button [matMenuTriggerFor]="languageMenu">
             <span>{{ translateService.currentLang | rdbLanguageName }}</span>
         </button>
     </div>
