@@ -6,7 +6,7 @@ export enum JwtClaims {
 }
 
 export interface IJwtTokenParsed extends JwtPayload {
-    [JwtClaims.name]: string;
+    username: string;
 }
 
 export class JwtHelper {
@@ -37,6 +37,6 @@ export class JwtHelper {
     }
 
     public static getUserName(token: string): string {
-        return JwtHelper.decodeJwt(token)?.[JwtClaims.name];
+        return JwtHelper.decodeJwt(token)?.username;
     }
 }

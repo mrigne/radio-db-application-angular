@@ -8,9 +8,9 @@ import { RequesterFactory } from '../requests/requester-factory';
 @Injectable({ providedIn: 'root' })
 export class ItemsService {
     private itemsRequester = this.requesterFactory.createRequester<void, IItem[]>({ url: `${Config.apiUrl}/items`, method: HttpMethod.GET });
-    private createNewItemRequester = this.requesterFactory.createRequester<IItem, void>({ url: `${Config.apiUrl}/item`, method: HttpMethod.POST });
-    private updateItemRequester = this.requesterFactory.createRequester<IItem, void>({ url: `${Config.apiUrl}/item`, method: HttpMethod.PATCH });
-    private deleteItemRequester = this.requesterFactory.createRequester<{ itemId: string }, void>({ url: `${Config.apiUrl}/item/{itemId}`, method: HttpMethod.DELETE });
+    private createNewItemRequester = this.requesterFactory.createRequester<IItem, void>({ url: `${Config.apiUrl}/items`, method: HttpMethod.POST });
+    private updateItemRequester = this.requesterFactory.createRequester<IItem, void>({ url: `${Config.apiUrl}/items/{id}`, method: HttpMethod.PATCH });
+    private deleteItemRequester = this.requesterFactory.createRequester<{ id: string }, void>({ url: `${Config.apiUrl}/item/{id}`, method: HttpMethod.DELETE });
 
     constructor(private requesterFactory: RequesterFactory) {
     }
@@ -27,7 +27,7 @@ export class ItemsService {
         return this.updateItemRequester.runRequest(updatedItem);
     }
 
-    public deleteItem(itemId: string) {
-        return this.deleteItemRequester.runRequest({ itemId });
+    public deleteItem(id: string) {
+        return this.deleteItemRequester.runRequest({ id });
     }
 }

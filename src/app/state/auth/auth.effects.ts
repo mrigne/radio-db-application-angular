@@ -18,7 +18,7 @@ export class AuthEffects {
             return this.authService.signin({ userName: loginData.userName, password: loginData.password }).pipe(
                 map(signinResponse => authActions.storeAuthToken({ token: signinResponse.token })),
                 catchError((err: HttpErrorResponse) => {
-                    return of(authActions.loginFailed({ message: err.error?.message }));
+                    return of(authActions.loginFailed({ message: 'login.errors.incorrectCredentials' }));
                 })
             );
         })

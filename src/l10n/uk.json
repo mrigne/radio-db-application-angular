@@ -16,6 +16,9 @@
         },
         "buttons": {
             "login": "Ввійти"
+        },
+        "errors": {
+            "incorrectCredentials": "Ім'я користувача або пароль введено невірно"
         }
     },
     "footer": {

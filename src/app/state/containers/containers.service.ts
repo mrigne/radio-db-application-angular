@@ -8,9 +8,9 @@ import { RequesterFactory } from '../requests/requester-factory';
 @Injectable({ providedIn: 'root' })
 export class ContainersService {
     private containersRequester = this.requesterFactory.createRequester<void, IContainer[]>({ url: `${Config.apiUrl}/containers`, method: HttpMethod.GET });
-    private createContainerRequester = this.requesterFactory.createRequester<IContainer, void>({ url: `${Config.apiUrl}/container`, method: HttpMethod.POST });
-    private updateContainerRequester = this.requesterFactory.createRequester<IContainer, void>({ url: `${Config.apiUrl}/container`, method: HttpMethod.PATCH });
-    private deleteContainerRequester = this.requesterFactory.createRequester<{ containerId: string }, void>({ url: `${Config.apiUrl}/container/{containerId}`, method: HttpMethod.DELETE });
+    private createContainerRequester = this.requesterFactory.createRequester<IContainer, void>({ url: `${Config.apiUrl}/containers`, method: HttpMethod.POST });
+    private updateContainerRequester = this.requesterFactory.createRequester<IContainer, void>({ url: `${Config.apiUrl}/containers/{id}`, method: HttpMethod.PATCH });
+    private deleteContainerRequester = this.requesterFactory.createRequester<{ id: string }, void>({ url: `${Config.apiUrl}/containers/{id}`, method: HttpMethod.DELETE });
 
     constructor(private requesterFactory: RequesterFactory) {
     }
@@ -27,7 +27,7 @@ export class ContainersService {
         return this.updateContainerRequester.runRequest(newContainer);
     }
 
-    public deleteContainer(containerId: string): Observable<void> {
-        return this.deleteContainerRequester.runRequest({ containerId });
+    public deleteContainer(id: string): Observable<void> {
+        return this.deleteContainerRequester.runRequest({ id });
     }
 }

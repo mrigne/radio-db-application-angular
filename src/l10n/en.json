@@ -16,6 +16,9 @@
         },
         "buttons": {
             "login": "Login"
+        },
+        "errors": {
+            "incorrectCredentials": "Username or password is incorrect"
         }
     },
     "footer": {
