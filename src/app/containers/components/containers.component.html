@@ -20,7 +20,7 @@
                 </button>
             </th>
             <td class="rdb-text-align-right rdb-nowrap" *matCellDef="let container">
-                <button [routerLink]="appRoutes.containers.containerId.edit.full(container.id)" class="rdb-inline" mat-icon-button [matTooltip]="'containers.toolTips.edit' | translate">
+                <button [routerLink]="appRoutes.containers.containerId.edit.full(container.id)" [queryParamsHandling]="'preserve'" class="rdb-inline" mat-icon-button [matTooltip]="'containers.toolTips.edit' | translate">
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button (click)="onDelete(container)" class="rdb-inline" mat-icon-button [matTooltip]="'containers.toolTips.delete' | translate">

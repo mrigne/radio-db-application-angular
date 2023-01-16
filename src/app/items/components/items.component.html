@@ -25,10 +25,10 @@
                 </button>
             </th>
             <td class="rdb-text-align-right rdb-nowrap" *matCellDef="let item">
-                <button [routerLink]="appRoutes.items.itemId.eject.full(item.id)" class="rdb-inline" mat-icon-button [matTooltip]="'items.toolTips.eject' | translate">
+                <button [routerLink]="appRoutes.items.itemId.eject.full(item.id)" [queryParamsHandling]="'preserve'" class="rdb-inline" mat-icon-button [matTooltip]="'items.toolTips.eject' | translate">
                     <mat-icon>eject</mat-icon>
                 </button>
-                <button [routerLink]="appRoutes.items.itemId.add.full(item.id)" class="rdb-inline" mat-icon-button [matTooltip]="'items.toolTips.add' | translate">
+                <button [routerLink]="appRoutes.items.itemId.add.full(item.id)" [queryParamsHandling]="'preserve'" class="rdb-inline" mat-icon-button [matTooltip]="'items.toolTips.add' | translate">
                     <mat-icon>add</mat-icon>
                 </button>
                 <button (click)="onDelete(item)" class="rdb-inline" mat-icon-button [matTooltip]="'items.toolTips.delete' | translate">
