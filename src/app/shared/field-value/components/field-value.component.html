@@ -1,4 +1,4 @@
-<p *ngIf="label && value">
-    <strong>{{ label | translate }}: </strong>
-    <span>{{ value }}</span>
+<p *ngIf="showField$">
+    <strong>{{ label$ | async | translate }}: </strong>
+    <span>{{ value$ | async }}</span>
 </p>

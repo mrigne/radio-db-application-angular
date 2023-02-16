@@ -1,5 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { isNil } from 'lodash';
 import { filter, take, tap } from 'rxjs';
@@ -10,7 +10,8 @@ import { IItem, itemsActions, itemsSelectorById } from '../../reducers/items';
 @Component({
     selector: 'rdb-item-delete',
     templateUrl: './item-delete.component.html',
-    styleUrls: ['./item-delete.component.scss']
+    styleUrls: ['./item-delete.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItemDeleteComponent implements OnInit {
     public container$ = this.store.select(containerByIdSelector(this.itemData.containerId));

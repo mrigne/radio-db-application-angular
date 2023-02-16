@@ -76,8 +76,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatMenuModule,
         MatIconModule,
         MatInputModule,
-        MatSelectModule,
-        FooterModule
+        MatSelectModule
     ],
     providers: [
         CookieService,

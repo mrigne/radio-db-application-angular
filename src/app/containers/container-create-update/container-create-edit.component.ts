@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -30,7 +30,8 @@ export interface ICreateUpdateContainerForm {
 
 @Component({
     selector: 'rdb-container-create',
-    templateUrl: './container-create-edit.component.html'
+    templateUrl: './container-create-edit.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContainerCreateEditComponent implements OnInit, OnDestroy {
     public form = this.fb.group<ICreateUpdateContainerForm>({

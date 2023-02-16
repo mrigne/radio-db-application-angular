@@ -1,5 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { isNil } from 'lodash';
 import { filter, take, tap } from 'rxjs';
@@ -9,7 +9,8 @@ import { containerByIdSelector, containersActions, IContainer } from '../../redu
 @Component({
     selector: 'rdb-container-delete',
     templateUrl: './container-delete.component.html',
-    styleUrls: ['./container-delete.component.scss']
+    styleUrls: ['./container-delete.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContainerDeleteComponent {
     constructor(@Inject(DIALOG_DATA) public containerData: IContainer, private store: Store, private dialogRef: DialogRef, private snackbarService: SnackbarService) {

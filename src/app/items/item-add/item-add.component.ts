@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -18,7 +18,8 @@ export interface IAddItemForm {
 @Component({
     selector: 'rdb-item-add',
     templateUrl: './item-add.component.html',
-    styleUrls: ['./item-add.component.scss']
+    styleUrls: ['./item-add.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItemAddComponent implements OnInit {
     @ViewChild('amountInput', { static: false })

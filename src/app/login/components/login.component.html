@@ -9,14 +9,22 @@
             <p>
                 <mat-form-field class="rdb-width-100">
                     <mat-label>{{ 'login.inputs.username' | translate }}</mat-label>
-                    <input matInput [formControl]="form.controls.userName" type="text">
+                    <input matInput
+                           id="userName"
+                           name="userName"
+                           [formControl]="form.controls.userName"
+                           type="text">
                     <mat-error *ngIf="form.controls.userName.invalid">{{ validationErrorMessageHelper.getErrorMessageByError(form.controls.userName) | async }}</mat-error>
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field class="rdb-width-100">
                     <mat-label>{{ 'login.inputs.password' | translate }}</mat-label>
-                    <input matInput [formControl]="form.controls.password" [type]="(hidePassword$ | async) ? 'password' : 'text'">
+                    <input matInput
+                           id="password"
+                           name="password"
+                           [formControl]="form.controls.password"
+                           [type]="(hidePassword$ | async) ? 'password' : 'text'">
                     <button type="button" mat-icon-button matSuffix (click)="toggleHidePassword()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword$ | async">
                         <mat-icon>{{(hidePassword$ | async) ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>

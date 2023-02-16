@@ -1,11 +1,13 @@
 <mat-form-field class="rdb-width-100" appearance="outline">
-    <mat-label>{{ label | translate }}</mat-label>
+    <mat-label>{{ label$ | async | translate }}</mat-label>
     <input #searchInput
+           id="search"
+           name="search"
            matInput
            [cdkTrapFocus]="false"
            cdkTrapFocusAutoCapture
            type="text"
-           [placeholder]="placeholder | translate"
+           [placeholder]="placeholder$ | async | translate"
            (input)="onInput($event)"
            (focus)="selectAll()"
            (keydown.tab)="onFocusOut($event)">

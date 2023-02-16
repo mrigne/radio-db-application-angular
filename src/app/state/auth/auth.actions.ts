@@ -8,7 +8,7 @@ export const authActions = createActionGroup({
         'Store Auth Token': props<ISignInResponse>(),
         'Login Failed': props<{ message: string; }>(),
         'Logout': emptyProps(),
-        'Refresh Auth Token': props<ISignInResponse>(),
+        'Refresh Auth Token': emptyProps(),
         'Token Is Alive': emptyProps()
     }
 })

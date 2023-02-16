@@ -1,5 +1,13 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnDestroy,
+    OnInit,
+    ViewChild
+} from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -18,7 +26,8 @@ export interface IItemWithContainer extends IItem {
 @Component({
     selector: 'rdb-items',
     templateUrl: './items.component.html',
-    styleUrls: ['./items.component.scss']
+    styleUrls: ['./items.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItemsComponent implements OnInit, OnDestroy, AfterViewInit {
     public readonly appRoutes = AppRoutes;

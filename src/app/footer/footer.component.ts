@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { languageActions } from '../state/language/language.actions';
@@ -7,7 +7,8 @@ import { ILanguage, supportedLanguages } from '../state/language/language.servic
 @Component({
     selector: 'rdb-footer',
     templateUrl: './footer.component.html',
-    styleUrls: ['./footer.component.scss']
+    styleUrls: ['./footer.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
     public readonly languages = supportedLanguages;

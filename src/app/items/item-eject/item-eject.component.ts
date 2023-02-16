@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -18,7 +18,8 @@ export interface IEjectItemForm {
 @Component({
     selector: 'rdb-item-eject',
     templateUrl: './item-eject.component.html',
-    styleUrls: ['./item-eject.component.scss']
+    styleUrls: ['./item-eject.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItemEjectComponent implements OnInit {
     @ViewChild('amountInput', { static: false })

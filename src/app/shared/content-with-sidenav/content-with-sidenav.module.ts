@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
+import { FooterModule } from '../../footer/footer.module';
 import { ContentWithSidenavComponent } from './components/content-with-sidenav.component';
 
 
@@ -11,7 +12,8 @@ import { ContentWithSidenavComponent } from './components/content-with-sidenav.c
     imports: [
         CommonModule,
         MatSidenavModule,
-        RouterOutlet
+        RouterOutlet,
+        FooterModule
     ],
     exports: [ContentWithSidenavComponent]
 })

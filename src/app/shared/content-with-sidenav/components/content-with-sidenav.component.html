@@ -1,8 +1,13 @@
 <mat-sidenav-container class="rdb-height-100">
-    <mat-sidenav-content class="rdb-content-padding">
-        <ng-content></ng-content>
+    <mat-sidenav-content class="rdb-content-padding sidenav-content-container">
+        <div class="rdb-width-100 scrollable-content-container">
+            <ng-content></ng-content>
+        </div>
+        <rdb-footer></rdb-footer>
     </mat-sidenav-content>
-    <mat-sidenav (closedStart)="onSideNavClose()" #sidenav mode="over" position="end" [opened]="sidebarOutlet.isActivated">
-        <router-outlet #sidebarOutlet="outlet"></router-outlet>
+    <mat-sidenav (closedStart)="onSideNavClose()" mode="over" position="end" [opened]="sidenavOutletActivated$ | async">
+        <router-outlet (activate)="sidenavOutletActivated$.next(true)"
+                       (deactivate)="sidenavOutletActivated$.next(false)">
+        </router-outlet>
     </mat-sidenav>
 </mat-sidenav-container>

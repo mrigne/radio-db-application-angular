@@ -1,4 +1,12 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    OnDestroy,
+    OnInit,
+    ViewChild
+} from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
@@ -21,7 +29,8 @@ export interface IAddNewItemForm {
 
 @Component({
     selector: 'rdb-item-add-new',
-    templateUrl: './item-add-new.component.html'
+    templateUrl: './item-add-new.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItemAddNewComponent implements OnInit, OnDestroy {
     @ViewChild('barcodeInput', { static: false })

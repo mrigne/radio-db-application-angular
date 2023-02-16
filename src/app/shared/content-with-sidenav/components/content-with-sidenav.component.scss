@@ -1,0 +1,8 @@
+.sidenav-content-container {
+    height: 100%;
+}
+
+.scrollable-content-container {
+    height: calc(100% - 72px);
+    overflow-y: scroll;
+}

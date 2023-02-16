@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { JwtHelper } from '../../helpers/jwt.helper';
 import { AppRoutes } from '../routes/app.routes';
@@ -8,7 +8,8 @@ import { AUTH_LOCAL_STORAGE_NAME } from '../state/auth/auth.service';
 @Component({
     selector: 'rdb-toolbar',
     templateUrl: './toolbar.component.html',
-    styleUrls: ['./toolbar.component.scss']
+    styleUrls: ['./toolbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent {
     public readonly appRoutes = AppRoutes;

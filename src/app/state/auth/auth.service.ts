@@ -22,7 +22,7 @@ export class AuthService {
         url: `${Config.apiUrl}/login`,
         method: HttpMethod.POST
     });
-    public refreshTokenRequester = this.requesterFactory.createRequester<ISignInResponse, ISignInResponse>({
+    public refreshTokenRequester = this.requesterFactory.createRequester<void, ISignInResponse>({
         url: `${Config.apiUrl}/refresh`,
         method: HttpMethod.POST
     });
@@ -34,7 +34,7 @@ export class AuthService {
         return this.signinRequester.runRequest(signinPayload);
     }
 
-    public refreshToken(authToken: string): Observable<ISignInResponse> {
-        return this.refreshTokenRequester.runRequest({ token: authToken });
+    public refreshToken(): Observable<ISignInResponse> {
+        return this.refreshTokenRequester.runRequest();
     }
 }

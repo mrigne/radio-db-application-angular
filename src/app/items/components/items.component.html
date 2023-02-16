@@ -19,7 +19,7 @@
         </ng-container>
         <ng-container matColumnDef="menu">
             <th class="rdb-text-align-right" mat-header-cell *matHeaderCellDef>
-                <button color="primary" class="rdb-nowrap" mat-raised-button [routerLink]="appRoutes.items.add.full()">
+                <button color="primary" class="rdb-nowrap" mat-raised-button [routerLink]="appRoutes.items.add.full()" [queryParamsHandling]="'preserve'">
                     <span>{{ 'items.addItemButton' | translate }}</span>
                     <mat-icon matIconPrefix>add</mat-icon>
                 </button>

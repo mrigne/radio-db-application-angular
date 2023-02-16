@@ -1,5 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
@@ -16,7 +16,8 @@ export interface IContainerWithItemsAmount extends IContainer {
 @Component({
     selector: 'rdb-containers',
     templateUrl: './containers.component.html',
-    styleUrls: ['./containers.component.scss']
+    styleUrls: ['./containers.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContainersComponent implements AfterViewInit, OnInit, OnDestroy {
     public readonly appRoutes = AppRoutes;
